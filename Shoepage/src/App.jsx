@@ -15,6 +15,13 @@ function App() {
     const thumbRef = useRef(null);
 
 
+    const fetchData = async () => {
+  let response = await fetch("https://7ringsstore.com/store")
+  let data = await response.json()
+  setApi(data)
+  console.log(data)
+}
+
    const nextSlide = () => {
     setCurrentIndex((prev) => (prev === imageList.length - 1 ? 0 : prev + 1));
   };
@@ -32,6 +39,8 @@ useEffect(() => {
         inline: "center"
       });
     }
+        fetchData()
+
   }, [currentIndex]);
    
 
@@ -112,7 +121,7 @@ useEffect(() => {
 
           <div className='flex justify-between'>
         <h1 className="text-2xl font-bold text-gray-900">
-            Nike Air Force 1 '07 Fresh {productName}
+            {productName}
           </h1>
          <span className='text-xl'>$190</span>
          </div>

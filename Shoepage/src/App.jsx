@@ -8,6 +8,8 @@ function App() {
   const [size, setSize] = useState(null)
   const [instruction, setInstruction] = useState('Details')
   const [currentIndex, setCurrentIndex] = useState(0)
+    const [api, setApi] = useState([])
+
 
 
     const thumbRef = useRef(null);
@@ -86,7 +88,7 @@ useEffect(() => {
                 className={`flex-shrink-0 p-1 rounded-xl border-2 transition-all 
                   ${currentIndex === index ? 'border-black shadow-md' : 'border-gray-200 hover:border-gray-400'}`}
               >
-                <img src={imgUrl} alt={`thumb ${index}`} className="w-12  lg:w-18 rounded-xl object-contain" />
+                <img src={imgUrl} alt={`thumb ${index}`} className="w-12  lg:w-16 rounded-xl object-contain" />
               </button>
 
               

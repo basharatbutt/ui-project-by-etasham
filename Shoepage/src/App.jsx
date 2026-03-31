@@ -8,6 +8,8 @@ function App() {
   const [size, setSize] = useState(null)
   const [instruction, setInstruction] = useState('Details')
   const [currentIndex, setCurrentIndex] = useState(0)
+    const thumbRef = useRef(null);
+
 
    const nextSlide = () => {
     setCurrentIndex((prev) => (prev === imageList.length - 1 ? 0 : prev + 1));
@@ -18,7 +20,16 @@ function App() {
   };
 
 
-   
+   useEffect(() => {
+    if (thumbRef.current) {
+      const activeItem = thumbRef.current.children[currentIndex];
+      activeItem?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center"
+      });
+    }
+  }, [currentIndex]);
 
   return (
     <>
@@ -50,7 +61,7 @@ function App() {
 
             {/* Displaying image using the currentIndex */}
             <img 
-              className="object-contain " 
+              className="object-contain rounded-4xl  " 
               src={imageList[currentIndex]} 
               alt="Nike Shoe" 
               width={1052}
@@ -74,7 +85,7 @@ function App() {
                 className={`p-1 rounded-xl border-2 transition-all 
                   ${currentIndex === index ? 'border-black shadow-md' : 'border-gray-200 hover:border-gray-400'}`}
               >
-                <img src={imgUrl} alt={`thumb ${index}`} className="w-16 lg:w-14 object-contain" />
+                <img src={imgUrl} alt={`thumb ${index}`} className="w-16  lg:w-14 rounded-xl object-contain" />
               </button>
             ))}
           </div>

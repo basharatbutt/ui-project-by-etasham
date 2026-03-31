@@ -1,4 +1,4 @@
-import { useState,useRef,useCallback } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 import './App.css'
 import { productName, imageList, colorOptions, shoeSizes, ins } from './productData'
 
@@ -8,6 +8,8 @@ function App() {
   const [size, setSize] = useState(null)
   const [instruction, setInstruction] = useState('Details')
   const [currentIndex, setCurrentIndex] = useState(0)
+
+
     const thumbRef = useRef(null);
 
 
@@ -19,8 +21,7 @@ function App() {
     setCurrentIndex((prev) => (prev === 0 ? imageList.length - 1 : prev - 1));
   };
 
-
-   useEffect(() => {
+useEffect(() => {
     if (thumbRef.current) {
       const activeItem = thumbRef.current.children[currentIndex];
       activeItem?.scrollIntoView({
@@ -30,6 +31,7 @@ function App() {
       });
     }
   }, [currentIndex]);
+   
 
   return (
     <>
@@ -51,13 +53,7 @@ function App() {
 
           
  <div className="relative w-full flex items-center group">
-            {/* Left Arrow */}
-            <button 
-              onClick={prevSlide}
-              className="absolute left-2 z-10 bg-white/80 hover:bg-black hover:text-white p-2 rounded-full shadow-md transition-all"
-            >
-              ❮
-            </button>
+           
 
             {/* Displaying image using the currentIndex */}
             <img 
@@ -67,29 +63,43 @@ function App() {
               width={1052}
             />
 
-            {/* Right Arrow */}
-            <button 
-              onClick={nextSlide}
-              className="absolute right-2 z-10 bg-white/80 hover:bg-black hover:text-white p-2 rounded-full shadow-md transition-all"
-            >
-              ❯
-            </button>
+            
           </div>
+          <div className="flex items-center gap-2 w-full max-w-[950px]">
+
+       <button 
+              onClick={prevSlide}
+              className="relative  flex-shrink-0 left-2 z-10 bg-white/80 hover:bg-black hover:text-white p-2 rounded-full shadow-md transition-all"
+            >
+              ❮
+            </button>
+
 
           {/* THUMBNAILS */}
-          <div className="flex flex-wrap justify-center gap-2">
+          <div
+           ref={thumbRef}
+              className="flex flex-nowrap overflow-hidden gap-2 scroll-smooth py-2">
             {imageList.map((imgUrl, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`p-1 rounded-xl border-2 transition-all 
+                className={`flex-shrink-0 p-1 rounded-xl border-2 transition-all 
                   ${currentIndex === index ? 'border-black shadow-md' : 'border-gray-200 hover:border-gray-400'}`}
               >
-                <img src={imgUrl} alt={`thumb ${index}`} className="w-16  lg:w-14 rounded-xl object-contain" />
+                <img src={imgUrl} alt={`thumb ${index}`} className="w-12  lg:w-18 rounded-xl object-contain" />
               </button>
+
+              
             ))}
           </div>
-        </div>
+<button 
+              onClick={nextSlide}
+              className="relative  flex-shrink-0 right-2 z-10 bg-white/80 hover:bg-black hover:text-white p-2 rounded-full shadow-md transition-all"
+            >
+              ❯
+            </button>
+            </div>
+                    </div>
 
 
 

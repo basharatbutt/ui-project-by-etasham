@@ -9,6 +9,7 @@ export const imageList = [
   "https://oxbowui.com/store/shoes/airmax/4.png",
   "https://oxbowui.com/store/shoes/airmax/5.png",
   "https://oxbowui.com/store/shoes/airmax/6.png",
+  
 ];
 
 export const colorOptions = [

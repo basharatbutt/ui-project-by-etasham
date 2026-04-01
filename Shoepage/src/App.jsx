@@ -18,7 +18,7 @@ function App() {
     const fetchData = async () => {
   let response = await fetch("https://7ringsstore.com/store")
   let data = await response.json()
-  setApi(data)
+  setApi(data);
   console.log(data)
 }
 

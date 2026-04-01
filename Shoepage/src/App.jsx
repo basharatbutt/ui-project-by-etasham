@@ -16,10 +16,15 @@ function App() {
 
 
     const fetchData = async () => {
-  let response = await fetch("https://7ringsstore.com/store")
-  let data = await response.json()
-  setApi(data)
-  console.log(data)
+           try {
+           let response = await fetch("https://7ringsstore.com/store");
+           if (!response.ok) throw new Error("Network response was not ok");
+           let data = await response.json();
+           setApi(data);
+           console.log(data)
+           } catch (error) {
+            console.error("API Error:", error);
+           }
 }
 
    const nextSlide = () => {
@@ -39,9 +44,14 @@ useEffect(() => {
         inline: "center"
       });
     }
-        fetchData()
-
   }, [currentIndex]);
+
+  useEffect(() => {
+    
+    fetchData();
+
+  }, [])
+  
    
 
   return (
@@ -157,6 +167,7 @@ useEffect(() => {
             <div className="flex flex-wrap gap-3">
               {shoeSizes.map((se) => (
                 <button 
+                key={se}
                   onClick={() => setSize(se)}
                   className={`text-sm  w-16 lg:w-28 h-12  flex items-center justify-center rounded-lg border-2 font-bold transition-all
                     ${size === se 
@@ -183,8 +194,8 @@ useEffect(() => {
 
 
         <div className="mt-4 border-t border-gray-200">
-            {ins.map((item) => (
-              <div key={item.title} className="border-b border-gray-200">
+            {ins.map((item, index) => (
+              <div key={index} className="border-b border-gray-200">
                 <button
                   onClick={() => setInstruction(instruction === item.title ? null : item.title)}
                   className="flex w-full justify-between items-center py-4 text-left font-medium text-gray-700 hover:text-black transition-all"

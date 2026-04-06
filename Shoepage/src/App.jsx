@@ -1,10 +1,9 @@
-import { useState, useRef, useCallback, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import './App.css'
 import { productName, imageList, colorOptions, shoeSizes, ins } from './productData'
 
 function App() {
   const [color, setColor] = useState(null)
-  const [image, setImage] = useState("https://oxbowui.com/store/shoes/airmax/1.png")
   const [size, setSize] = useState(null)
   const [instruction, setInstruction] = useState('Details')
   const [currentIndex, setCurrentIndex] = useState(0)
